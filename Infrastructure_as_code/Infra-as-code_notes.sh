@@ -33,3 +33,7 @@ aws cloudformation describe-stacks --stack-name myFirstTest
 
 
 #If no stack name is specified, then it will return the description for all the stacks created in your account.
+
+
+#To connect to your EC2 instances using pem 
+ssh -i "Udacity-IAC.pem" ec2-user@ec2-34-238-43-186.compute-1.amazonaws.com
