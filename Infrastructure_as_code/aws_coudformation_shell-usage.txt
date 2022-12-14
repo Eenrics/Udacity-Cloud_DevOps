@@ -1,0 +1,10 @@
+##################  How to use the shell script for creating, updating and deleting cloudformation stack ########################
+
+# To create new aws cloudformation infrastructure as code
+./create.sh <stack_name> <template_yaml_file> <parameter_json_file>
+
+# To update existing aws cloudformation infrastructure as code
+./update.sh <stack_name> <template_yaml_file> <parameter_json_file>
+
+# To delete a aws cloudformation infrastructure as code
+./delete.sh <stack_name>
