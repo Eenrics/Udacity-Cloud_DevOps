@@ -4,6 +4,9 @@ aws ssm describe-parameters
 # To see the detail of a parameter of our choice with its values
 aws ssm get-parameters --names "<parameter-name>"
 
+# Or to get single parameter
+aws ssm get-parameter --name "<parameter-name>"
+
 # To see the parameter history
 aws ssm get-parameter-history --name "<parameter-name>"
 
