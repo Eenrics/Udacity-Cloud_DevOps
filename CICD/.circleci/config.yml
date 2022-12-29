@@ -1,0 +1,68 @@
+version: 2.1
+
+commands:
+  print_pipeline_id:
+    parameters:
+      id:
+        type: string
+    steps:
+      - run: echo << parameters.id >>
+
+
+workflows:
+  test-env-vars:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - analyse
+            
+defaults:  &defaults
+  docker:
+      - image: cimg/base:2020.01
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:  echo "test 101" > File.txt
+      - save_cache:
+          key: v1-my-project-{{ .Branch }}
+          paths:
+            - "File.txt"
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            mkdir testFold/
+            echo $MY_ENV_VAR > testFold/file.md
+      - persist_to_workspace:
+          root: testFold/
+          paths:
+            - file.md
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-my-project-{{ .Branch }}
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $MY_ENV_VAR
+            chmod u+x test.sh
+            ./test.sh
+      - attach_workspace:
+          at: testFold/
+      - run: ls && ls testFold/
+  analyse:
+    <<: *defaults
+    steps:
+      - print_pipeline_id:
+          id: << pipeline.id >>
+      - run:
+          name: Failed Tests
+          command: echo "Test Filed"
+          when: on_fail
