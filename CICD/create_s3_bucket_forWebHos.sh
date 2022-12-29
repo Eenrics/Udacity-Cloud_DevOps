@@ -1,3 +1,4 @@
+############### THIS IS FOR CLOUD FORMATION YMAL FILE#################
 Parameters:
 # Existing Bucket name
 PipelineID:
@@ -30,3 +31,43 @@ Resources:
       Value: !Sub ${PipelineID}
       Export:
         Name: PipelineID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##################### THIS IS FOR WEBHOSTING S3 BUCKET YAML FILE##########################
+Parameters:
+# New Bucket name
+MyBucketName:
+  Description: Existing Bucket name
+  Type: String
+Resources:
+WebsiteBucket:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: !Sub "${MyBucketName}"
+    AccessControl: PublicRead
+    WebsiteConfiguration:
+      IndexDocument: index.html
+      ErrorDocument: error.html
+WebsiteBucketPolicy:
+  Type: AWS::S3::BucketPolicy
+  Properties:
+    Bucket: !Ref 'WebsiteBucket'
+    PolicyDocument:
+      Statement:
+      - Sid: PublicReadForGetBucketObjects
+        Effect: Allow
+        Principal: '*'
+        Action: s3:GetObject
+        Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
