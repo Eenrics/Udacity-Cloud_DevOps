@@ -1,4 +1,4 @@
-############### THIS IS FOR CLOUD FORMATION YMAL FILE#################
+############### THIS IS FOR CLOUD FRONT YAML FILE#################
 Parameters:
 # Existing Bucket name
 PipelineID:
@@ -71,3 +71,20 @@ WebsiteBucketPolicy:
         Principal: '*'
         Action: s3:GetObject
         Resource: !Join ['', ['arn:aws:s3:::', !Ref 'WebsiteBucket', /*]]
+
+
+
+
+
+############## RUN CLOUDFRONT YAML FILE LIKE ##################
+aws cloudformation deploy \
+--template-file cloudfront.yml \
+--stack-name production-distro \
+--parameter-overrides PipelineID="${S3_BUCKET_NAME}" \ # Name of the S3 bucket you created manually.
+--tags project=udapeople &
+################# RUN S3-BUCKET YAML FILE LIKE################
+aws cloudformation deploy \
+--template-file bucket.yml \
+--stack-name production-distro \
+--parameter-overrides PipelineID="${S3_BUCKET_NAME}" \ # Name of the S3 bucket you created manually.
+--tags project=udapeople &
