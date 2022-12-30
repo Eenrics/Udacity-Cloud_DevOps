@@ -1,0 +1,97 @@
+#### Prometheus Install
+wget https://github.com/prometheus/prometheus/releases/download/v2.41.0/prometheus-2.41.0.linux-amd64.tar.gz
+# tutorial ---  https://codewizardly.com/prometheus-on-aws-ec2-part3/
+
+#### Install Exporter ... this time node
+wget https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
+# tutorial ---  https://codewizardly.com/prometheus-on-aws-ec2-part2/
+
+### To Install Alert Manager
+mkdir alertmanager && cd alermanager
+wget https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz
+# tutorial ---  https://codewizardly.com/prometheus-on-aws-ec2-part4/
+
+
+
+
+
+
+
+### To Unzip them from tar
+tar xvfz <filename>
+
+### To Run It
+./prometheus        or         ./node-exporter         or             ./alertmanager
+
+### To config prometheus.yml file
+- job_name: 'node'
+  static_configs:
+  - targets: ['<TargetHostDnsName>:9100']
+
+refresh prometheus page --> status --> service discovery
+
+### For automatic discovery
+- job_name: 'node'
+  ec2_sd_configs:
+    - region: us-east-1
+      access_key: ATYSJKDHKHDNMKD<DNJSDGH
+      secret_key: oodKlld/fkdj;d/fkldkjfjdljf
+      port: 9100
+
+### To add alert rules
+##create rules.yml file in Prometheus server and paste
+groups:
+  - name: AllInstances
+    rules:
+    - alert: UsingTooMuchMemory
+      # Condition for alerting
+      expr: node_memory_MemFree_bytes < 1000000
+      for: 1m
+    # Annotation - additional informational labels to store more inforamtion
+      annotations:
+        title: 'Instance {{ $labels.instance }} is amost out of space'
+        description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for ...'
+    # Labels - additional labels to be attached to the alert
+      labels:
+        severity: 'critical'
+
+##Then add this to prometheus.yml file and restart prometheus
+rule_files:
+  - "rules.yml"
+  
+ 
+### Configuring alertmanager
+## in prometheus.yml file uncomment or add this line of code
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+## It is on localhost because the prometheus and the alermanager are on the same machines ... make sure you have installed alertmanager for this one
+
+
+### To configure alert message ... in alertmanager.yml file
+## Delete all scripts and write or copy past this
+global:
+  resolve_timeout: 1m
+  slack_api_url: 'https://hooks.slack.com/services.TYUIPGHJK/GYUIO/GHJU/jklgfhjkjkdkjf'
+
+route:
+  receiver: 'slack-notifications'
+
+receivers:
+  - name: 'slack-notifications'
+  slack_configs:
+  - channel: '#monitoring-instances'
+    send_resolved: true
+
+## Save and restart alermanager
+
+  
+
+port 9090 -- prometheus
+port 9100 -- exporters
+port 9093 -- alert 
+
+
+https://prometheus.io/download/
