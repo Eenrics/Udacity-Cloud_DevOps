@@ -12,3 +12,6 @@ kubectl get deployments
 
 # If you had one Kubernetes app "test-app" running, and to scale the app up to 6 application instances
 kubectl scale deployments/test-app --replicas=6
+
+# Getting the logs from a running pod
+kubectl logs <pod-name>
