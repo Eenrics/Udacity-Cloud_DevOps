@@ -43,3 +43,6 @@ docker build -t my-python-app .
 
 # To run the container, given my-python-app as the image tag and my-running-app as the container name
 docker run -it --rm --name my-running-app my-python-app
+
+# Launch Containers in a Kubernetes Cluster
+docker stack deploy --namespace my-app --compose-file /path/to/docker-compose.yml mystack
