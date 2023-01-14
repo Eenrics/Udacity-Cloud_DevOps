@@ -1,0 +1,6 @@
+1. Default VPC and subnets
+2. IAM role for the cluster
+  - (myEKSClusterRole) -- AWS service -- EKS -- (EKS - Cluster) -- AmazonEKSClusterPolicy --
+  - (myEKSWorkerNodeRole) -- AWS service -- EC2 -- EC2 -- AmazonEKSWorkerNodePolicy && AmazonEC2ContainerRegistryReadOnly && AmazonEKS_CNI_Policy
+3. SSH key pair
+4. Create an EKS Cluster
