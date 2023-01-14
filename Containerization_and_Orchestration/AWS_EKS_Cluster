@@ -1,6 +1,27 @@
 1. Default VPC and subnets
+
 2. IAM role for the cluster
   - (myEKSClusterRole) -- AWS service -- EKS -- (EKS - Cluster) -- AmazonEKSClusterPolicy --
   - (myEKSWorkerNodeRole) -- AWS service -- EC2 -- EC2 -- AmazonEKSWorkerNodePolicy && AmazonEC2ContainerRegistryReadOnly && AmazonEKS_CNI_Policy
+
 3. SSH key pair
+
 4. Create an EKS Cluster
+  -  EKS service -- Amazon EKS -- Clusters -- Create cluster -- Name:myEKSCluster -- Kubernetes Version:default -- Cluster service role:myEKSClusterRole 
+      -- VPC, subnets, and security group : default -- Cluster endpoint access : Public -- Configure logging - Accept the defaults and create the cluster
+
+5. Create a Node Group
+  - click on the cluster name -- Configuration -- Compute -- click on the Add Node Group -- Name:myNodeGroup -- Node IAM Role : myEKSWorkerNodeRole 
+      -- Node Group compute and scaling configuration : use below instruction -
+          Field	                          Value	                              Purpose
+          AMI type	                      Amazon Linux 2 (AL2_x86_64)	        OS
+          Capacity type	                  On-Demand	                          Instance purchasing option
+          Instance types	                t3.micro	                          2 vCPU, 1 GiB memory
+          Disk size	                      20 GiB	                            ---
+          Scaling configuration		
+          Min size	                      2	                                  Min number of nodes for scaling in.
+          Max size	                      2	                                  Max number of nodes for scaling out.
+          Desired size	                  2	                                  Initial count
+          
+       -- Node Group network configuration -- VPC, subnets, and security group : default -- SSH key pair: created in the above -- Allow remote access from:All
+       
