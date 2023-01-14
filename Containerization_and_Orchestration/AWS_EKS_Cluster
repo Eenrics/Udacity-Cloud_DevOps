@@ -25,3 +25,35 @@
           
        -- Node Group network configuration -- VPC, subnets, and security group : default -- SSH key pair: created in the above -- Allow remote access from:All
        
+--
+
+or we can use cli to create this all things
+
+1. Install eksctl
+
+2. Create basic cluster 
+      eksctl create cluster
+      
+  - or to specify details explicitly
+      eksctl create cluster --name myCluster --nodes=4 --region=us-east-2 [--profile <profile-name>]
+      
+  - or to create advanced cluster
+      eksctl create cluster --config-file=<path>
+
+3. View progress
+      eksctl utils describe-stacks --region=us-east-2 --cluster=eksctl-demo [--profile <profile-name>]
+
+4. To list the details about the existing cluster(s)
+      eksctl get cluster [--name=<name>][--region=<region>]
+  - or in detailed way
+      eksctl get cluster --name=eksctl-demo --region=us-east-2 [--profile <profile-name>]
+      
+5. To check the health of your clusters nodes
+      kubectl get nodes  [--profile <profile-name>]
+  
+6. Delete a cluster
+      eksctl delete cluster --name=<name> [--region=<region>]
+      
+# Did you see the difference in the usage of eksctl vs kubectl? 
+    The former is used to create/delete/edit a cluster, 
+        whereas the latter is used to interact with the cluster.
