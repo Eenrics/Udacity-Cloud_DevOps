@@ -13,15 +13,15 @@
 5. Create a Node Group
   - click on the cluster name -- Configuration -- Compute -- click on the Add Node Group -- Name:myNodeGroup -- Node IAM Role : myEKSWorkerNodeRole 
       -- Node Group compute and scaling configuration : use below instruction -
-          Field	                          Value	                              Purpose
-          AMI type	                      Amazon Linux 2 (AL2_x86_64)	        OS
-          Capacity type	                  On-Demand	                          Instance purchasing option
-          Instance types	                t3.micro	                          2 vCPU, 1 GiB memory
-          Disk size	                      20 GiB	                            ---
+          Field___________________________Value_______________________________Purpose
+          AMI type________________________Amazon Linux 2 (AL2_x86_64)_________OS
+          Capacity type___________________On-Demand___________________________Instance purchasing option
+          Instance types__________________t3.micro____________________________2 vCPU, 1 GiB memory
+          Disk size_______________________20 GiB______________________________---
           Scaling configuration		
-          Min size	                      2	                                  Min number of nodes for scaling in.
-          Max size	                      2	                                  Max number of nodes for scaling out.
-          Desired size	                  2	                                  Initial count
+          Min size________________________2___________________________________Min number of nodes for scaling in.
+          Max size________________________2___________________________________Max number of nodes for scaling out.
+          Desired size____________________2___________________________________Initial count
           
        -- Node Group network configuration -- VPC, subnets, and security group : default -- SSH key pair: created in the above -- Allow remote access from:All
        
