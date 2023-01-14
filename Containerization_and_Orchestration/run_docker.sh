@@ -9,6 +9,9 @@ docker image ls
 # Run flask app
 docker run -it demolocal bash
 
+# Or by specifying the ports 
+docker run -p 8000:5001 demolocal
+
 # Create Docker Volume
 docker volume create docker-data
 
