@@ -37,3 +37,9 @@ docker run -p 127.0.0.1:80:9999/tcp ubuntu bash
 
 # Configuring Memory, CPU and GPU
 docker run -it --cpus=".25" --memory="6m" ubuntu /bin/bash
+
+# To build your container, if tagging your container as my-python-app
+docker build -t my-python-app .
+
+# To run the container, given my-python-app as the image tag and my-running-app as the container name
+docker run -it --rm --name my-running-app my-python-app
