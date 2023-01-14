@@ -53,6 +53,8 @@ or we can use cli to create this all things
   
 6. Delete a cluster
       eksctl delete cluster --name=<name> [--region=<region>]
+  - or in detailed way
+      eksctl delete cluster --region=us-east-2 --name=eksctl-demo [--profile <profile-name>]
       
 # Did you see the difference in the usage of eksctl vs kubectl? 
     The former is used to create/delete/edit a cluster, 
