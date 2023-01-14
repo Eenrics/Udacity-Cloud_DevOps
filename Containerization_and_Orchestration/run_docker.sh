@@ -33,4 +33,4 @@ docker port <container name>
 docker run -p 127.0.0.1:80:9999/tcp ubuntu bash
 
 # Configuring Memory, CPU and GPU
-docker run -it --cpus=".25" ubuntu /bin/bash
+docker run -it --cpus=".25" --memory="6m" ubuntu /bin/bash
