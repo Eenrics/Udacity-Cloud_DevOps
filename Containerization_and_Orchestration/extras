@@ -1,4 +1,4 @@
 1. Disaster recovery -- backing up data --> We can use Velero
 2. Load testing is also important part  --> We can use Locus or Apache Benchmark
-3. Monitoring, Alerts and Incidents     --> We can use Prometheus
+3. Monitoring, Alerts and Incidents     --> We can use Prometheus w/ Grafana
 4. Notification of Alerts               --> We can use PagerDuty
