@@ -7,3 +7,20 @@ sudo cp minikube-linux-amd64 /usr/bin/minikube
 curl -LO https://dl.k8s.io/release/v1.26.0/bin/linux/amd64/kubectl
 chmod +x kubectl 
 sudo cp kubectl /usr/bin/kubectl
+
+# install eksctl
+curl -LO "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz"
+tar xvfz eksctl_Linux_amd64.tar.gz
+chmod +x eksctl
+sudo cp eksctl /usr/bin/
+
+# install hadolint
+curl -LO https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64
+chmod +x hadolint-Linux-x86_64
+sudo cp hadolint-Linux-x86_64 /usr/bin/hadolint
+
+# install circleci
+curl -LO https://github.com/CircleCI-Public/circleci-cli/releases/download/v0.1.22924/circleci-cli_0.1.22924_linux_amd64.tar.gz
+tar xvfz circleci-cli_0.1.22924_linux_amd64.tar.gz
+chmod +x circleci-cli_0.1.22924_linux_amd64/circleci
+sudo cp circleci-cli_0.1.22924_linux_amd64/circleci /usr/bin/
